@@ -21,9 +21,11 @@ import com.meisolsson.githubsdk.model.Repository;
 import com.meisolsson.githubsdk.model.request.repository.CreateSubscription;
 import com.meisolsson.githubsdk.model.Subscription;
 import com.meisolsson.githubsdk.model.User;
+import com.meisolsson.githubsdk.model.request.activity.SubscriptionRequest;
 
 import io.reactivex.Single;
 import retrofit2.Response;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
@@ -45,9 +47,8 @@ public interface WatchingService {
     Single<Response<Subscription>> getRepositorySubscription(@Path("owner") String owner, @Path("repo") String repo);
 
     @PUT("repos/{owner}/{repo}/subscription")
-    Single<Response<Subscription>> setRepositorySubscription(@Path("owner") String owner, @Path("repo") String repo,
-                                                             @Body CreateSubscription subscriptionBody);
+    Single<Response<Subscription>> setRepositorySubscription(@Path("owner") String owner, @Path("repo") String repo, @Body SubscriptionRequest request);
 
     @DELETE("repos/{owner}/{repo}/subscription")
-    Single<Response<Boolean>> deleteRepositorySubscription(@Path("owner") String owner, @Path("repo") String repo);
+    Single<Response<Void>> deleteRepositorySubscription(@Path("owner") String owner, @Path("repo") String repo);
 }
